@@ -1,5 +1,5 @@
 :root {
-    background-color: rgb(29,26,26)
+    background-color: lightgray
 }
 *{
     box-sizing:border-box;
@@ -10,7 +10,7 @@
 }
 h1 {
     font-size: 5.4rem;
-    color:white;
+    color:black;
     margin-bottom: 5rem;
 }
 
