@@ -5,6 +5,8 @@ var container=document.querySelector("#home");
 var score=0
 var timer=0
 var questionIndex=0
+var currentQuestion={}
+var avaliableQuestions=[]
 
 var questions= [
     {q:"What is javascript?",
@@ -14,7 +16,11 @@ var questions= [
     {q:"Which of these is not a data type?",
     o:["string", "array", "css", "numbers"],
     a:"css"
-}
+},
+    {q:"2+2",
+    o:["1","6","4","9"],
+    a:"4"
+    },
 
 ];
 
@@ -34,67 +40,62 @@ start.addEventListener('click', function(){
     
 })
 
-// function quizTime(){
-//    for (var i=0; i<questions.length; i++){
-       
-     
+function quizTime(){
+    score=0
+    questionIndex=0
+    avaliableQuestions=[...questions]
+    appendQuestion();
+}
 
-//        if(
-//            (answer === questions[i].a)
-//        ){
-//            score++
-//            alert("correct");
-//        }
-//        else{
-//            alert("wrong");
-//        }
-//     }
-
-// }
 
 function appendQuestion(){
+    
     var theQuestion = document.createElement("h2")
     theQuestion.textContent=questions[questionIndex].q
     container.appendChild(theQuestion)
 
-for (var i=0; i<questions[questionIndex].o.length; i++){
+for (var i = 0; i < questions[questionIndex].o.length; i++){
     var theOptions = document.createElement("button")
     theOptions.textContent=questions[questionIndex].o [i]
 // theOptions.addEventListener('click', handleAnswer
     theOptions.onclick= handleAnswer;
     
    
-    
+
     container.appendChild(theOptions)
     
-   
-    
-    
-    
-}
+    }
     
 }
 
 function handleAnswer(){
-    console.log(this.textContent);
+    // console.log(this.textContent);
     if (this.textContent=== questions[questionIndex].a) {
-        // console.log("correct")
+        console.log("correct")
         var correct= document.createElement("h2");
-        correct.textContent=("Correct!")
-        score++
-        console.log(score)
+        correct.textContent=("Correct!");
+        score++;
+        console.log(score);
 
         
         // this.questions[questionIndex].q++;
         container.appendChild(correct )
-        
-
     }
+    else {
+        var wrong= document.createElement("h2");
+        wrong.textContent=("Incorrect!  ");
+        // countdown(timer--);
+        console.log(wrong);
+        container.appendChild(wrong);
+    }
+
+
+    
 }
 
 
 function countdown(){
-    var timeLeft = 2;
+    var timeLeft = 10;
     var timer = document.querySelector (".time")
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
@@ -116,14 +117,14 @@ function countdown(){
   }, 1000);
 }
 
-function highScore(){
-    var message=document.createElement("h2")
-    message.textContent="Input your initials to save your score!";
-    container.appendChild(message)
+function highScore(type, message){
+    var prompt=document.createElement("h2")
+    prompt.textContent="Input your initials to save your score!";
+    container.appendChild(prompt)
 
     var box=document.createElement("TEXTAREA")
-    // box.setAttribute("type", "text");
-    // var words = box.textContent
+    box.setAttribute(type, "text");
+    box.textContent=message;
     container.appendChild(box);
 
 
@@ -131,9 +132,17 @@ function highScore(){
     saveBtn.textContent=("Save");
     container.appendChild(saveBtn)
 
+      
     saveBtn.addEventListener('click', function(){
-        console.log(box.textContent)
+        console.log(message);
     })
     // box.textContent = saveName;
     
+}
+function viewHighScore() {
+    var viewScore = document.createElement("h2")
+    viewScore.textContent = box("TEXTAREA")
+    container.appendChild(viewScore)
+    score.textContent=score;
+
 }

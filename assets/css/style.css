@@ -15,7 +15,14 @@ h1 {
 }
 
 h2 {
-    font-size: 4.2rem:
+    font-size: 30px:
+}
+.time{
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: blue;
 }
 .container{
     display:flex;
